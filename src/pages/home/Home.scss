@@ -1,0 +1,50 @@
+@import "../../config/css-config/mixin.scss";
+
+.home {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 15px;
+
+  @include md {
+    padding: 15px 20px;
+  }
+
+  .tags {
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: white;
+    position: sticky;
+    top: 56px;
+    height: 60px;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  &-videos {
+    background-color: white;
+    padding-top: 10px;
+    display: flex;
+    flex-flow: wrap;
+    gap: 30px 0px;
+    width: calc(100% - 10px);
+    margin: 0 auto;
+
+    @include md {
+      gap: 30px 20px;
+      width: 100%;
+    }
+
+    @include lg {
+      gap: 30px 15px;
+    }
+
+    @include xl {
+      gap: 30px 13px;
+    }
+  }
+}

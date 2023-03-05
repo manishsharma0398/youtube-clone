@@ -1,0 +1,168 @@
+@import "../../config/css-config/mixin.scss";
+
+.video-page {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  max-width: 1200px;
+  margin: 0px auto;
+  padding: 10px;
+
+  @include lg {
+    display: grid;
+    grid-template-areas:
+      "video related"
+      "comments related";
+    gap: 20px;
+    grid-template-columns: auto 350px;
+    grid-template-rows: auto 100%;
+    padding: 20px 30px 20px 20px;
+  }
+
+  &__data-video {
+    grid-area: video;
+
+    .video-title {
+      margin: 20px 0;
+      font-size: 20px;
+      line-height: 28px;
+      font-weight: 600;
+      color: #0f0f0f;
+    }
+
+    &-channel {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+
+      img {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+
+      &-details {
+        display: flex;
+        flex-direction: column;
+
+        .channel-name {
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 22px;
+          color: #0f0f0f;
+          text-decoration: none;
+        }
+
+        .channel-stats {
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 18px;
+          color: #606060;
+        }
+      }
+    }
+
+    &-desc {
+      background-color: rgba(0, 0, 0, 0.09);
+      border-radius: 15px;
+      overflow: hidden;
+      padding: 20px;
+
+      .video-stats {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+
+        span {
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 20px;
+          color: #0f0f0f;
+        }
+      }
+
+      p {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        color: #0f0f0f;
+      }
+    }
+  }
+
+  &__data-related {
+    grid-area: related;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .related-video {
+      display: flex;
+      gap: 10px;
+
+      &__image {
+        border-radius: 10px;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      &__text-content {
+        &-title {
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2; /* number of lines to show */
+          overflow: hidden;
+
+          text-decoration: none;
+          color: inherit;
+          width: calc(100% - 1px);
+
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 20px;
+          color: #0f0f0f;
+
+          margin-bottom: 4px;
+        }
+
+        &__meta {
+          display: flex;
+          flex-direction: column;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 18px;
+          color: #606060;
+
+          .channel-name {
+            // font-size: 10px;
+          }
+
+          &-stats {
+            display: flex;
+            gap: 5px;
+            // font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+
+  &__comments {
+    grid-area: comments;
+    // align-self: start;
+    // align-items: self-start;
+
+    .comment-count {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 22px;
+      color: #0f0f0f;
+    }
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+}

@@ -1,0 +1,52 @@
+.comment {
+  display: flex;
+  gap: 15px;
+
+  &-left {
+    flex-shrink: 0;
+
+    img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      overflow: hidden;
+    }
+  }
+
+  &-right {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    &-top {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+
+      h3 {
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 18px;
+        color: #0f0f0f;
+      }
+
+      span {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 18px;
+        color: #0f0f0f;
+      }
+    }
+
+    &-middle {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: #0f0f0f;
+    }
+
+    &-end {
+    }
+  }
+}
