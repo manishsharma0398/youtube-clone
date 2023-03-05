@@ -1,10 +1,13 @@
-import { useContext, useEffect, useState } from "react";
+import numeral from "numeral";
 import { useParams } from "react-router-dom";
-import YoutubeContext from "../../context/youtubeApi";
 import { AiFillCheckCircle } from "react-icons/ai";
+import { useContext, useEffect, useState } from "react";
+
+import YoutubeContext from "../../context/youtubeApi";
+
+import Video from "../../components/video/Video";
 
 import "./Channel.scss";
-import Video from "../../components/video/Video";
 
 const Channel = () => {
   const [showChannelBodySection, setShowChannelBodySection] =
@@ -16,14 +19,16 @@ const Channel = () => {
 
   const channelId = useParams().channelId;
 
-  const { channelData, getChannelDetails, channelVideos } =
+  const { channelData, getChannelDetails, channelVideos, isLoading } =
     useContext(YoutubeContext);
 
   useEffect(() => {
     getChannelDetails(channelId);
   }, []);
 
-  return (
+  return isLoading ? (
+    <Spinner />
+  ) : (
     <div className="channel">
       <div className="channel__banner-section">
         {
@@ -64,8 +69,20 @@ const Channel = () => {
         </div>
       </div>
       <div className="channel-body">
-        <button onClick={() => channelBodyHandler("videos")}>Videos</button>
-        <button onClick={() => channelBodyHandler("about")}>About</button>
+        <div className="channel-body-actions">
+          <button
+            className={showChannelBodySection === "videos" && "active"}
+            onClick={() => channelBodyHandler("videos")}
+          >
+            Videos
+          </button>
+          <button
+            className={showChannelBodySection === "about" && "active"}
+            onClick={() => channelBodyHandler("about")}
+          >
+            About
+          </button>
+        </div>
         {showChannelBodySection === "videos" && (
           <div className="channel-body__videos">
             {channelVideos?.contents?.map((video, i) => (
@@ -75,28 +92,30 @@ const Channel = () => {
         )}
         {showChannelBodySection === "about" && (
           <div className="channel-body__about">
-            <h3>About</h3>
             <div className="left">
-              <h3>Description</h3>
-              {channelData?.description}
+              <span className="head">Description</span>
+              <span className="channel-desc">{channelData?.description}</span>
+
               <hr />
-              <h3>Details</h3>
-              Loation: {channelData?.country}
+              <span className="head">Details</span>
+              <span>Location: {channelData?.country}</span>
               <hr />
-              <h3>Links</h3>
-              {channelData?.links?.map((link) => (
-                <a href={link?.targetUrl} target="_blank">
+              <span className="head">Links</span>
+              {channelData?.links?.map((link, i) => (
+                <a key={i} href={link?.targetUrl} target="_blank">
                   {link?.title}
                 </a>
               ))}
               <hr />
             </div>
             <div className="right">
-              Stats
+              <span className="head">Stats</span>
               <hr />
-              {channelData?.joinedDateText}
+              <span className="right-stats">{channelData?.joinedDateText}</span>
               <hr />
-              {channelData?.stats?.views} Views
+              <span className="right-stats">
+                {numeral(channelData?.stats?.views).format(",")} Views
+              </span>
               <hr />
             </div>
           </div>

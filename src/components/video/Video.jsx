@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
+import { duration, viewCount } from "../../utils/duration";
+
 import "./Video.scss";
 
 const Video = ({ data, channelVideo }) => {
@@ -16,13 +18,7 @@ const Video = ({ data, channelVideo }) => {
             ))[video?.thumbnails?.length - 1]
           }
 
-          <span className="duration">
-            {parseInt(video?.lengthSeconds / 60) +
-              ":" +
-              (video?.lengthSeconds % 60 === 0
-                ? "00"
-                : video?.lengthSeconds % 60)}
-          </span>
+          <span className="duration">{duration(video?.lengthSeconds)}</span>
         </Link>
         <div className="video-text">
           <Link
@@ -56,7 +52,7 @@ const Video = ({ data, channelVideo }) => {
               </Link>
               <span className="video-stats">
                 <span className="views">
-                  {parseInt(video?.stats?.views / 1000)}K views
+                  {viewCount(video?.stats?.views)} views
                 </span>
 
                 <span className="time">{video?.publishedTimeText}</span>

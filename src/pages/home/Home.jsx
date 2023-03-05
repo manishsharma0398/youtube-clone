@@ -4,17 +4,21 @@ import YoutubeContext from "../../context/youtubeApi";
 
 import Tag from "../../components/tag/Tag";
 import Video from "../../components/video/Video";
+import Spinner from "../../components/spinner/Spinner";
 
 import "./Home.scss";
 
 const Home = () => {
-  const { searchResults, searchYoutubeVideos } = useContext(YoutubeContext);
+  const { searchResults, searchYoutubeVideos, isLoading } =
+    useContext(YoutubeContext);
 
   useEffect(() => {
     searchYoutubeVideos("Nepali Songs");
   }, []);
 
-  return (
+  return isLoading ? (
+    <Spinner />
+  ) : (
     <div className="home">
       <div className="tags">
         {searchResults?.refinements?.map((refine, i) => (

@@ -1,19 +1,16 @@
+import { useRef } from "react";
 import { ImMic } from "react-icons/im";
-import { Link, useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { BiVideoPlus } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 import { IoMdNotificationsOutline } from "react-icons/io";
 
+import ProfilePic from "../../assets/unnamed.jpg";
 import NavbarToggler from "../navbar-toggler/NavbarToggler";
 
-import ProfilePic from "../../assets/unnamed.jpg";
-
 import "./Navbar.scss";
-import { useContext, useRef } from "react";
-import YoutubeContext from "../../context/youtubeApi";
 
 const Navbar = () => {
-  const { searchYoutubeVideos } = useContext(YoutubeContext);
   const navigate = useNavigate();
 
   const inputValue = useRef("");
@@ -24,8 +21,7 @@ const Navbar = () => {
     const searchTerm = inputValue.current.value;
 
     if (searchTerm.length > 1) {
-      searchYoutubeVideos(searchTerm);
-      return navigate("/search-results");
+      return navigate(`/search/${searchTerm}`);
     }
   };
 

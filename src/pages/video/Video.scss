@@ -66,13 +66,11 @@
     &-desc {
       background-color: rgba(0, 0, 0, 0.09);
       border-radius: 15px;
-      overflow: hidden;
       padding: 20px;
 
       .video-stats {
         display: flex;
         gap: 10px;
-        margin-bottom: 10px;
 
         span {
           font-size: 14px;
@@ -82,11 +80,33 @@
         }
       }
 
-      p {
+      .video-desc {
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        white-space: pre-wrap;
         font-size: 14px;
         font-weight: 400;
         line-height: 20px;
         color: #0f0f0f;
+
+        &.expanded {
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2; /* number of lines to show */
+          overflow: hidden;
+        }
+      }
+
+      .desc-toggler {
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        color: #0f0f0f;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: bold;
       }
     }
   }
@@ -106,6 +126,18 @@
         border-radius: 10px;
         overflow: hidden;
         flex-shrink: 0;
+        position: relative;
+
+        .duration {
+          position: absolute;
+          padding: 2px 4px;
+          font-size: 12px;
+          z-index: 5;
+          bottom: 8px;
+          right: 6px;
+          background-color: #0f0f0f;
+          color: white;
+        }
       }
 
       &__text-content {
@@ -136,13 +168,11 @@
           color: #606060;
 
           .channel-name {
-            // font-size: 10px;
           }
 
           &-stats {
             display: flex;
             gap: 5px;
-            // font-size: 14px;
           }
         }
       }
@@ -151,8 +181,6 @@
 
   &__comments {
     grid-area: comments;
-    // align-self: start;
-    // align-items: self-start;
 
     .comment-count {
       font-size: 16px;

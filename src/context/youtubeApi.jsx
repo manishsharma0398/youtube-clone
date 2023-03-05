@@ -10,8 +10,10 @@ export const YoutubeProvider = ({ children }) => {
   const [videoData, setVideoData] = useState([]);
   const [relatedVideos, setRelatedVideos] = useState([]);
   const [videoComments, setVideoComments] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getVideoDetails = async (videoId) => {
+    setIsLoading(true);
     const response = await makeRequest.get(`/video/details/`, {
       params: {
         id: videoId,
@@ -30,21 +32,22 @@ export const YoutubeProvider = ({ children }) => {
       },
     });
     setVideoComments(response3?.data);
-
-    console.log({ response, response2, response3 });
+    setIsLoading(false);
   };
 
   const searchYoutubeVideos = async (searchItem) => {
+    setIsLoading(true);
     const response = await makeRequest.get(`/search/`, {
       params: {
         q: searchItem,
       },
     });
-    console.log(response.data);
     setSearchResults(response.data);
+    setIsLoading(false);
   };
 
   const getChannelDetails = async (channelId) => {
+    setIsLoading(true);
     const response1 = await makeRequest.get(`/channel/details/`, {
       params: {
         id: channelId,
@@ -57,6 +60,7 @@ export const YoutubeProvider = ({ children }) => {
       },
     });
     setChannelVideos(response2.data);
+    setIsLoading(false);
   };
 
   const value = {
@@ -66,6 +70,7 @@ export const YoutubeProvider = ({ children }) => {
     videoData,
     videoComments,
     relatedVideos,
+    isLoading,
     getChannelDetails,
     searchYoutubeVideos,
     getVideoDetails,
@@ -77,22 +82,3 @@ export const YoutubeProvider = ({ children }) => {
 };
 
 export default YoutubeContext;
-
-// const options = {
-//   method: "GET",
-//   url: "https://youtube138.p.rapidapi.com/search/",
-//   params: { q: "despacito", hl: "en", gl: "US" },
-//   headers: {
-//     "X-RapidAPI-Key": "ccd2bbd356msh2f520b93dc00d4cp1d27a9jsn5a95cd8aad1f",
-//     "X-RapidAPI-Host": "youtube138.p.rapidapi.com",
-//   },
-// };
-
-// axios
-//   .request(options)
-//   .then(function (response) {
-//     console.log(response.data);
-//   })
-//   .catch(function (error) {
-//     console.error(error);
-//   });

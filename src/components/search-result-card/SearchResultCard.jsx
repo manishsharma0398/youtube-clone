@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
+import { AiFillCheckCircle } from "react-icons/ai";
+
 import "./SearchResultCard.scss";
+import { duration } from "../../utils/duration";
 
 const SearchResultCard = ({ data }) => {
   const { channel, type, video } = data || {};
-
-  // console.log(data);
 
   return type === "channel" ? (
     <div className="search-result search-result-channel">
@@ -18,10 +19,13 @@ const SearchResultCard = ({ data }) => {
       <div className="content">
         <Link to={`/channel/${channel?.channelId}`} className="channel-title">
           {channel?.title}
-
-          {channel?.badges?.map((badge) => (
-            <span>{badge.text}</span>
-          ))}
+          {channel?.badges?.map((badge, i) =>
+            badge?.type === "VERIFIED_CHANNEL" ? (
+              <AiFillCheckCircle key={i} />
+            ) : (
+              <span key={i}>{badge.text}</span>
+            )
+          )}
         </Link>
 
         <div className="channel-stats">
@@ -32,7 +36,7 @@ const SearchResultCard = ({ data }) => {
         <span className="channel-desc">{channel?.descriptionSnippet}</span>
       </div>
     </div>
-  ) : (
+  ) : type === "video" ? (
     <div className="search-result search-result-video">
       <Link to={`/video/${video?.videoId}`} className="placeholder">
         {
@@ -40,6 +44,7 @@ const SearchResultCard = ({ data }) => {
             <img src={img?.url} alt={video?.title} key={i} />
           ))[video?.thumbnails?.length - 1]
         }
+        <span className="duration">{duration(video?.lengthSeconds)}</span>
       </Link>
       <div className="content">
         <Link className="video-title" to={`/video/${video?.videoId}`}>
@@ -63,9 +68,13 @@ const SearchResultCard = ({ data }) => {
 
           <span>{video?.author?.title}</span>
 
-          {video?.author?.badges.map((badge, i) => (
-            <span key={i}>{badge?.text}</span>
-          ))}
+          {video?.author?.badges.map((badge, i) =>
+            badge?.type === "VERIFIED_CHANNEL" ? (
+              <AiFillCheckCircle key={i} />
+            ) : (
+              <span key={i}>{badge.text}</span>
+            )
+          )}
         </Link>
         <span className="video-desc">{video?.descriptionSnippet}</span>
         <div className="badges">
@@ -77,6 +86,6 @@ const SearchResultCard = ({ data }) => {
         </div>
       </div>
     </div>
-  );
+  ) : null;
 };
 export default SearchResultCard;

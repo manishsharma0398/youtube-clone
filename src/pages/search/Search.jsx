@@ -1,12 +1,26 @@
-import { useContext } from "react";
-import SearchResultCard from "../../components/search-result-card/SearchResultCard";
+import { useParams } from "react-router-dom";
+import { useContext, useEffect } from "react";
+
 import YoutubeContext from "../../context/youtubeApi";
+
+import SearchResultCard from "../../components/search-result-card/SearchResultCard";
+
 import "./Search.scss";
+import Spinner from "../../components/spinner/Spinner";
 
 const Search = () => {
-  const { searchResults } = useContext(YoutubeContext);
+  const { searchResults, searchYoutubeVideos, isLoading } =
+    useContext(YoutubeContext);
 
-  return (
+  const searchTerm = useParams().searchTerm;
+
+  useEffect(() => {
+    searchYoutubeVideos(searchTerm);
+  }, [searchTerm]);
+
+  return isLoading ? (
+    <Spinner />
+  ) : (
     <div className="search-results">
       {searchResults?.contents?.length &&
         searchResults?.contents?.map((searchResult, i) => (
