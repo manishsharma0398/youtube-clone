@@ -5,15 +5,16 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.02);
 
   .spinner {
-    width: 80px;
-    height: 80px;
+    background-color: white;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    border: 10px solid gray;
-    border-top: 10px solid rgb(179, 68, 68);
-    border-bottom: 10px solid green;
-    animation: spinner 1s ease-in-out infinite;
+    border: 5px solid rgb(241, 233, 233);
+    border-top: 5px solid rgb(73, 73, 160);
+    animation: spinner 1s linear infinite;
   }
 }
 

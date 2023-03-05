@@ -21,7 +21,7 @@ const Sidebar = () => {
             <Link
               className="category"
               key={i}
-              to={`/search/${category?.label}`}
+              to={`/search/${category?.label} Videos`}
             >
               <span className="icon">{category?.icon}</span>
 

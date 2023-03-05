@@ -42,6 +42,7 @@ const Video = () => {
             playing={true}
             pip={true}
             width="100%"
+            height="100%"
             volume={0.5}
           />
         </div>
@@ -141,8 +142,8 @@ const Video = () => {
         <div className="comment-count">
           {videoComments?.totalCommentsCount} Comments
         </div>
-        {videoComments?.comments?.map((comment) => (
-          <Comment comment={comment} key={comment?.id} />
+        {videoComments?.comments?.map((comment, i) => (
+          <Comment comment={comment} key={i} />
         ))}
       </div>
     </div>

@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import YoutubeContext from "../../context/youtubeApi";
 
 import Video from "../../components/video/Video";
+import Spinner from "../../components/spinner/Spinner";
 
 import "./Channel.scss";
 
@@ -71,13 +72,13 @@ const Channel = () => {
       <div className="channel-body">
         <div className="channel-body-actions">
           <button
-            className={showChannelBodySection === "videos" && "active"}
+            className={showChannelBodySection === "videos" ? "active" : ""}
             onClick={() => channelBodyHandler("videos")}
           >
             Videos
           </button>
           <button
-            className={showChannelBodySection === "about" && "active"}
+            className={showChannelBodySection === "about" ? "active" : ""}
             onClick={() => channelBodyHandler("about")}
           >
             About
